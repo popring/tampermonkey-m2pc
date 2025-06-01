@@ -2,10 +2,11 @@
 // @name         移动端链接跳电脑端
 // @description  自动将移动端链接跳转为电脑端访问的网页
 // @namespace    https://github.com/popring/tampermonkey-m2pc
-// @version      2025-02-17/v2
+// @version      2025-06-01
 // @author       popring
 // @match        https://m.huxiu.com/*
 // @match        https://m.thepaper.cn/*
+// @match        https://threejs.org/docs/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=huxiu.com
 // @grant        none
 // @license MIT
@@ -24,6 +25,9 @@ var main = (function (devMode) {
         return `https://www.thepaper.cn/newsDetail_forward_${contid}?${url.searchParams.toString()}`;
       }
       return originURL.replace('m.thepaper.cn', 'www.thepaper.cn');
+    },
+    'threejs.org': (originURL) => {
+      return originURL.replace('/docs/#api/en/', '/docs/#api/zh/');
     },
   };
 
