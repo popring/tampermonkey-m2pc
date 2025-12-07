@@ -2,7 +2,7 @@
 // @name         移动端链接跳电脑端
 // @description  自动将移动端链接跳转为电脑端访问的网页
 // @namespace    https://github.com/popring/tampermonkey-m2pc
-// @version      2025-06-01
+// @version      2025-12-07
 // @author       popring
 // @match        https://m.huxiu.com/*
 // @match        https://m.thepaper.cn/*
