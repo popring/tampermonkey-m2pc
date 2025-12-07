@@ -7,6 +7,7 @@
 // @match        https://m.huxiu.com/*
 // @match        https://m.thepaper.cn/*
 // @match        https://threejs.org/docs/*
+// @match        https://item.m.jd.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=huxiu.com
 // @grant        none
 // @license MIT
@@ -14,7 +15,7 @@
 // @updateURL https://update.greasyfork.org/scripts/510561/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%93%BE%E6%8E%A5%E8%B7%B3%E7%94%B5%E8%84%91%E7%AB%AF.meta.js
 // ==/UserScript==
 
-var main = (function (devMode) {
+var main = function (devMode) {
   'use strict';
   var map = {
     'm.huxiu.com': 'www.huxiu.com',
@@ -28,6 +29,22 @@ var main = (function (devMode) {
     },
     'threejs.org': (originURL) => {
       return originURL.replace('/docs/#api/en/', '/docs/#api/zh/');
+    },
+    'item.m.jd.com': (originURL) => {
+      var url = new URL(originURL);
+
+      if (!url.pathname.startsWith('/product/')) {
+        return originURL; // 非商品页不处理
+      }
+
+      var last = url.pathname.split('/').pop();
+      var skuId = last && last.split('.')[0];
+
+      if (!skuId) {
+        return originURL; // 保险处理
+      }
+
+      return `https://item.jd.com/${skuId}.html`;
     },
   };
 
@@ -82,7 +99,7 @@ var main = (function (devMode) {
   }
 
   return convertLink;
-});
+};
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = main;

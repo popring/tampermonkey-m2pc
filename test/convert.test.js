@@ -32,4 +32,10 @@ describe('URL转换测试', () => {
     );
   });
 
+  test('京东商品页链接转换', () => {
+    expect(convertLink('https://item.m.jd.com/product/14024791.html')).toBe(
+      'https://item.jd.com/14024791.html'
+    );
+  });
+
 });
